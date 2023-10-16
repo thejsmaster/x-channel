@@ -1,0 +1,35 @@
+{
+  "name": "x-channel",
+  "version": "1.0.1",
+  "type": "commonjs",
+  "author": "Sean Freeman",
+  "scripts": {
+    "dev": "tsc",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.18",
+    "typescript": "^5.2.2"
+  },
+  "description": "React library for parent to child and child to parent communication over channels to share state/data or function.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thejsmaster/use-XYZ.git"
+  },
+  "keywords": [
+    "xChannel",
+    "event bus",
+    "service bus",
+    "inter component communication",
+    "react"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thejsmaster/x-channel/issues"
+  },
+  "homepage": "https://github.com/thejsmaster/x-channel#readme"
+}
