@@ -1,4 +1,4 @@
-# React Channel Communication
+# x-channel
 
 A simple utility for enabling communication between components using channels in React applications.
 
@@ -6,69 +6,85 @@ A simple utility for enabling communication between components using channels in
 
 You can install this package via npm:
 
-\`\`\`bash
-npm install react-channel-communication
-\`\`\`
+```bash
+npm install x-channel
+```
 
 ## Usage
 
-### \`postMessage(channelName: string, ...props: any[])\`
+### useXChannel
 
-The \`postMessage\` function allows you to send a message to a specific channel. It will notify all registered listeners for that channel.
+The `useXChannel` hook provides a way to listen for messages on a specific channel. When a message is sent to that channel, the provided callback function will be invoked.
 
-\`\`\`javascript
-import { postMessage } from 'react-channel-communication';
+```javascript
+import { useXChannel } from "x-channel";
 
-postMessage('myChannel', 'Hello, World!');
-\`\`\`
-
-### \`useXChannel(channelName: string, callback: Function)\`
-
-The \`useXChannel\` hook provides a way to listen for messages on a specific channel. When a message is sent to that channel, the provided callback function will be invoked.
-
-\`\`\`javascript
-import { useXChannel } from 'react-channel-communication';
-
-useXChannel('myChannel', (message) => {
-console.log('Received a message:', message);
+useXChannel("myChannel", (message) => {
+  console.log("Received a message:", message);
 });
-\`\`\`
+```
 
-### \`getListenerCount(channelName: string)\`
+### getListenerCount
 
-The \`getListenerCount\` function allows you to check how many listeners are currently registered for a specific channel.
+The `getListenerCount` function allows you to check how many listeners are currently registered for a specific channel.
 
-\`\`\`javascript
-import { getListenerCount } from 'react-channel-communication';
+```javascript
+import { getListenerCount } from "x-channel";
 
-const count = getListenerCount('myChannel');
-console.log('Number of listeners for myChannel:', count);
-\`\`\`
+const count = getListenerCount("myChannel");
+console.log("Number of listeners for myChannel:", count);
+```
+
+### postMessage
+
+The `postMessage` function allows you to send a message to a specific channel. It will notify all registered listeners for that channel.
+
+```javascript
+import { postMessage } from "x-channel";
+
+postMessage("myChannel", "Hello, World!");
+```
 
 ## Example
 
 Here's a basic example of using these functions within a React component:
 
-\`\`\`javascript
-import React from 'react';
-import { postMessage, useXChannel } from 'react-channel-communication';
+```javascript
+import React from "react";
+import { postMessage, useXChannel } from "x-channel";
 
-function MyComponent() {
-useXChannel('myChannel', (message) => {
-console.log('Received a message:', message);
-});
+function App() {
+  const post = useXChannel("myChannel", (message) => {
+    console.log("Received a message from Test:", message);
+  });
 
-const sendMessage = () => {
-postMessage('myChannel', 'Hello, from MyComponent!');
-};
+  const sendMessage = () => {
+    post("myChannel", "Hello, from App!");
+  };
 
-return (
-<div>
-<button onClick={sendMessage}>Send Message</button>
-</div>
-);
+  return (
+    <div>
+      <button onClick={sendMessage}>Send Message</button>
+      <Test />
+    </div>
+  );
 }
-\`\`\`
+function Test() {
+  const post = useXChannel("myChannel", (message) => {
+    console.log("Received a message from APP:", message);
+  });
+
+  const sendMessage = () => {
+    post("myChannel", "Hello, from Test!");
+  };
+
+  return (
+    <div>
+      <button onClick={sendMessage}>Send Message</button>
+    </div>
+  );
+}
+```
 
 ## License
 
